@@ -1,15 +1,15 @@
 package model;
 
 public class Car {
-    private String make;
+    private CarType carType;
     private String model;
     private int year;
     private String licensePlateNumber;
     private double rentalPricePerDay;
     private boolean isAvailable;
 
-    public Car(String make, String model, int year, String licensePlateNumber, double rentalPricePerDay, boolean isAvailable) {
-        this.make = make;
+    public Car(CarType carType, String model, int year, String licensePlateNumber, double rentalPricePerDay, boolean isAvailable) {
+        this.carType = carType;
         this.model = model;
         this.year = year;
         this.licensePlateNumber = licensePlateNumber;
@@ -17,12 +17,12 @@ public class Car {
         this.isAvailable = isAvailable;
     }
 
-    public String getMake() {
-        return make;
+    public CarType getCarType() {
+        return carType;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public void setCarType(CarType carType) {
+        this.carType = carType;
     }
 
     public String getModel() {

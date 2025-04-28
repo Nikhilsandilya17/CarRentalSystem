@@ -13,6 +13,7 @@ public class Main {
         }
     }
 }
+
 //
 //The car rental system should allow customers to browse and reserve available cars for specific dates.
 //Each car should have details such as make, model, year, license plate number, and rental price per day.
