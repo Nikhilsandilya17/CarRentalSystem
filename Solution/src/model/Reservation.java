@@ -14,8 +14,6 @@ public class Reservation {
     private String returnDate;
     private double totalAmount;
 
-
-
     public Reservation(Car car, Customer customer, String reservationDate, String returnDate) {
         this.car = car;
         this.customer = customer;
@@ -23,11 +21,12 @@ public class Reservation {
         this.returnDate = returnDate;
     }
 
+
     public double getTotalAmount(){
         return car.getRentalPricePerDay() * calculateDateDifference(reservationDate, returnDate, dateFormat);
     }
 
-    public static long calculateDateDifference(String startDate, String endDate, String format) {
+    private static long calculateDateDifference(String startDate, String endDate, String format) {
         // Define the date format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 

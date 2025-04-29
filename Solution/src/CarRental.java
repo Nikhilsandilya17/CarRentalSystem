@@ -36,12 +36,12 @@ public class CarRental {
                 .toList();
     }
 
-    public boolean makeReservation(Car car, Customer customer, String startDate, String endDate){
+    public boolean bookReservation(Car car, Customer customer, String startDate, String endDate){
         if(car.isAvailable()) {
             car.setAvailable(false);
             Reservation reservation = new Reservation(car, customer, startDate, endDate);
             double amount = reservation.getTotalAmount();
-            paymentStrategy.processPayment(amount);
+            makePayment(amount);
             reservations.put(car.getLicensePlateNumber(), reservation);
             return true;
         }
@@ -52,15 +52,23 @@ public class CarRental {
         if(!car.isAvailable() && reservations.containsKey(car.getLicensePlateNumber())) {
             Reservation reservation = reservations.get(car.getLicensePlateNumber());
             double oldAmount = reservation.getTotalAmount();
-            reservation.setReservationDate(startDate);
-            reservation.setReturnDate(endDate);
-            reservation.setTotalAmount(reservation.getTotalAmount());
+            updateReservation(reservation, startDate, endDate);
             reservations.put(car.getLicensePlateNumber(), reservation);
             double newAmount = reservation.getTotalAmount() - oldAmount;
-            paymentStrategy.processPayment(newAmount);
+            makePayment(newAmount);
             return true;
         }
         return false;
+    }
+
+    private void updateReservation(Reservation reservation, String startDate, String endDate){
+        reservation.setReservationDate(startDate);
+        reservation.setReturnDate(endDate);
+        reservation.setTotalAmount(reservation.getTotalAmount());
+    }
+
+    private void makePayment(double amount){
+        paymentStrategy.processPayment(amount);
     }
 
 

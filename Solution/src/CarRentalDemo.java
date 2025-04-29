@@ -23,7 +23,7 @@ public class CarRentalDemo {
         }
         String startDate = LocalDate.now().toString();
         String endDate = LocalDate.now().plusDays(3).toString();
-        if(carRental.makeReservation(availableCars.get(0), customer, startDate, endDate)){
+        if(carRental.bookReservation(availableCars.get(0), customer, startDate, endDate)){
             System.out.println("Reservation successfull for Car: "+availableCars.get(0).toString());
         }
         else{
