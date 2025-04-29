@@ -23,18 +23,13 @@ public class Reservation {
 
 
     public double getTotalAmount(){
-        return car.getRentalPricePerDay() * calculateDateDifference(reservationDate, returnDate, dateFormat);
+        return car.getRentalPricePerDay() * calculateDateDifference(reservationDate, returnDate);
     }
 
-    private static long calculateDateDifference(String startDate, String endDate, String format) {
-        // Define the date format
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-
-        // Parse the strings into LocalDate objects
+    private static long calculateDateDifference(String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Reservation.dateFormat);
         LocalDate start = LocalDate.parse(startDate, formatter);
         LocalDate end = LocalDate.parse(endDate, formatter);
-
-        // Calculate and return the difference in days
         return ChronoUnit.DAYS.between(start, end);
     }
 

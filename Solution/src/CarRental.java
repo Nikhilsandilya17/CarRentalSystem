@@ -37,6 +37,7 @@ public class CarRental {
     }
 
     public boolean bookReservation(Car car, Customer customer, String startDate, String endDate){
+        validDate(startDate, endDate);
         if(car.isAvailable()) {
             car.setAvailable(false);
             Reservation reservation = new Reservation(car, customer, startDate, endDate);
@@ -49,6 +50,7 @@ public class CarRental {
     }
 
     public boolean modifyReservation(Car car, String startDate, String endDate){
+        validDate(startDate, endDate);
         if(!car.isAvailable() && reservations.containsKey(car.getLicensePlateNumber())) {
             Reservation reservation = reservations.get(car.getLicensePlateNumber());
             double oldAmount = reservation.getTotalAmount();
@@ -59,6 +61,12 @@ public class CarRental {
             return true;
         }
         return false;
+    }
+
+    private void validDate(String startDate, String endDate){
+        if(startDate==null || endDate==null || endDate.compareTo(startDate) < 0) {
+            throw new IllegalArgumentException("End date cannot be less than start date or null");
+        }
     }
 
     private void updateReservation(Reservation reservation, String startDate, String endDate){
