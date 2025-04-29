@@ -17,6 +17,18 @@ public class Car {
         this.isAvailable = isAvailable;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carType=" + carType +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", licensePlateNumber='" + licensePlateNumber + '\'' +
+                ", rentalPricePerDay=" + rentalPricePerDay +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
+
     public CarType getCarType() {
         return carType;
     }
