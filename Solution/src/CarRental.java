@@ -40,13 +40,17 @@ public class CarRental {
         validDate(startDate, endDate);
         if(car.isAvailable()) {
             car.setAvailable(false);
-            Reservation reservation = new Reservation(car, customer, startDate, endDate);
+            Reservation reservation = getReservation(car, customer, startDate, endDate);
             double amount = reservation.getTotalAmount();
             makePayment(amount);
             reservations.put(car.getLicensePlateNumber(), reservation);
             return true;
         }
         return false;
+    }
+
+    private Reservation getReservation(Car car, Customer customer, String startDate, String endDate) {
+        return new Reservation(car, customer, startDate, endDate);
     }
 
     public boolean modifyReservation(Car car, String startDate, String endDate){
